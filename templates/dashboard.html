@@ -7,8 +7,7 @@
 {% endblock %}
 
 {% block js_block %}
-	<script type="text/javascript" src="{% static 'js/tweets.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/order.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -17,9 +16,12 @@
                 <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
                 <input type="text" class="filter form-control" placeholder="What you looking for?">
 			</div>
+			<br/><br/><br/>
+			<button class="btn btn-success pull-right" data-target="#create_order" data-toggle="modal">Create Order</button>
+			<button class="btn btn-primary pull-right" id="download">Download CSV</button>
 
 			<div  class="dashboard-container">
-				<button class="btn btn-primary pull-right" data-target="#create_order" data-toggle="modal">Create Order</button>
+
 				<table class="table table-responsive" data-toggle="table" data-sort-name="order_status">
 					<thead>
 						<tr>
@@ -32,7 +34,7 @@
 					</thead>
 					<tbody>
 						{% for order in orders %}
-							<tr>
+							<tr class="searching">
 								<td>{{order.order_id}}<td>
 								<td>{{order.product_name | truncatechars:40}}<td>
 								<td>{{order.order_status}}<td>

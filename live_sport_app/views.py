@@ -5,10 +5,6 @@ from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 # Create your views here.
 
-def home(request):
-    return render(request,'base.html',{})
-
-
 # here dashboard
 def dashboard(request):
     orders=Order.objects.all().order_by('-order_created')

@@ -10,66 +10,72 @@
 	<script type="text/javascript" src="{% static 'js/order.js' %}"></script>
 {% endblock %}
 
+{% block extra %}
+	<div class="col-md-3 input-group pull-right form-group">
+		<span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+		<input type="text" class="filter form-control" placeholder="What you looking for?">
+	</div>
+{% endblock %}
+
 {% block content %}
 	<div class='container'>
-			 <div class="col-md-3 input-group pull-right form-group" >
-                <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                <input type="text" class="filter form-control" placeholder="What you looking for?">
-			</div>
-			<br/><br/><br/>
+		<div class="btn-wrapper">
 			<button class="btn btn-success pull-right" data-target="#create_order" data-toggle="modal">Create Order</button>
 			<button class="btn btn-primary pull-right" id="download">Download CSV</button>
+		</div>
 
-			<div  class="dashboard-container">
-
-				<table class="table table-responsive" data-toggle="table" data-sort-name="order_status">
-					<thead>
-						<tr>
-							<th>OrderId</th>
-							<th>Product Name</th>
-							<th data-field="order_status" data-sortable="true" >Order Status</th>
-							<th>Product Url</th>
-							<th>Cost Price</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for order in orders %}
-							<tr class="searching">
-								<td>{{order.order_id}}<td>
-								<td>{{order.product_name | truncatechars:40}}<td>
-								<td>{{order.order_status}}<td>
-								<td><a href="{{order.product_url}}">{{order.product_url}}</a></td>
-								<td>{{order.price}}</td>
+		<div  class="dashboard-container">
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-responsive table-condensed table-hover table-striped" data-toggle="table" data-sort-name="order_status">
+						<thead>
+							<tr>
+								<th>OrderId</th>
+								<th>Product Name</th>
+								<th>Order Status</th>
+								<th>Product Url</th>
+								<th>Cost Price</th>
+								<th></th>
+								<th></th>
+								<th></th>
 							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-
-				<!--Pagination -->
-				<div class="pagination" style="float:right;">
-						<span class="step-links">
-						  	{% if orders.has_previous %}
-								<a href="?page={{orders.previous_page_number}}">Previous</a>
-						  	{% endif %}
-
-						  	<span class="current">
-								Page {{orders.number}} of {{orders.paginator.num_pages}}.
-						  	</span>
-
-							{% if orders.has_next %}
-								<a href="?page={{orders.next_page_number}}">Next</a>
-
-							{% endif %}
-
-            			</span>
+						</thead>
+						<tbody>
+							{% for order in orders %}
+								<tr class="searching">
+									<td>{{order.order_id}}<td>
+									<td>{{order.product_name | truncatechars:40}}<td>
+									<td>{{order.order_status}}<td>
+									<td><a href="{{order.product_url}}">{{order.product_url}}</a></td>
+									<td>{{order.price}}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
 				</div>
-
-
-
 			</div>
 
 
+				<!--Pagination -->
+			<div class="pagination" style="float:right;">
+				<span class="step-links">
+				  	{% if orders.has_previous %}
+						<a href="?page={{orders.previous_page_number}}">Previous</a>
+				  	{% endif %}
+
+				  	<span class="current">
+						Page {{orders.number}} of {{orders.paginator.num_pages}}.
+				  	</span>
+
+					{% if orders.has_next %}
+						<a href="?page={{orders.next_page_number}}">Next</a>
+
+					{% endif %}
+
+    			</span>
+			</div>
 		</div>
+	</div>
 
 	<!-- create a new order -->
 	<div class="modal fade" id="create_order">

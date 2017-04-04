@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url,include
 from django.contrib import admin
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -22,4 +23,9 @@ urlpatterns = [
     url(r'^accounts/logout/', 'user_profile.views.user_logout', name='logout'),
     url(r'',include('live_sport_app.urls',namespace='live_sport_app')),
     url(r'^user/',include('user_profile.urls',namespace='user_profile')),
+]
+
+
+urlpatterns +=[
+        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 ]

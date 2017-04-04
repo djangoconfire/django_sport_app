@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+	<link rel="stylesheet" href="{% static 'css/order.css'%}" type="text/css">
+{% endblock %}
+
+{% block js_block %}
+	<script type="text/javascript" src="{% static 'js/tweets.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+	<div class='container'>
+			 <div class="col-md-3 input-group pull-right form-group" >
+                <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+                <input type="text" class="filter form-control" placeholder="What you looking for?">
+			</div>
+
+			<div  class="dashboard-container">
+				<button class="btn btn-primary pull-right" data-target="#create_order" data-toggle="modal">Create Order</button>
+				<table class="table table-responsive" data-toggle="table" data-sort-name="order_status">
+					<thead>
+						<tr>
+							<th>OrderId</th>
+							<th>Product Name</th>
+							<th data-field="order_status" data-sortable="true" >Order Status</th>
+							<th>Product Url</th>
+							<th>Cost Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for order in orders %}
+							<tr>
+								<td>{{order.order_id}}<td>
+								<td>{{order.product_name | truncatechars:40}}<td>
+								<td>{{order.order_status}}<td>
+								<td><a href="{{order.product_url}}">{{order.product_url}}</a></td>
+								<td>{{order.price}}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+				<!--Pagination -->
+				<div class="pagination" style="float:right;">
+						<span class="step-links">
+						  	{% if orders.has_previous %}
+								<a href="?page={{orders.previous_page_number}}">Previous</a>
+						  	{% endif %}
+
+						  	<span class="current">
+								Page {{orders.number}} of {{orders.paginator.num_pages}}.
+						  	</span>
+
+							{% if orders.has_next %}
+								<a href="?page={{orders.next_page_number}}">Next</a>
+
+							{% endif %}
+
+            			</span>
+				</div>
+
+
+
+			</div>
+
+
+		</div>
+
+	<!-- create a new order -->
+	<div class="modal fade" id="create_order">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                    	Create a New Order
+                    </h4>
+                     <button type="button" style="float:right;" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+
+                </div>
+
+                <div class="modal-body">
+					{% include 'order_form.html' with form=form %}
+				</div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+	</div>
+
+{% endblock %}

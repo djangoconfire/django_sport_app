@@ -84,7 +84,7 @@ def user_login(request):
 def user_logout(request):
     try:
         logout(request)
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/accounts/login/')
     except:
         return HttpResponseRedirect("/")
 

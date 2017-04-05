@@ -4,8 +4,8 @@ from user_profile.models import UserProfile
 
 class Order(models.Model):
     ORDER_STATUS = (
-        ('A', 'Active'),
-        ('CN', 'Cancelled')
+        ('Active', 'Active'),
+        ('Cancelled', 'Cancelled')
     )
     user                = models.ForeignKey(UserProfile,null=True)
     order_id            = models.CharField(max_length=200,null=True)

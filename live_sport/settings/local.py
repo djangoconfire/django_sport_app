@@ -52,7 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'kombu.transport.django',
+    # 'kombu.transport.django',
     #local apps
     'live_sport_app',
     'user_profile',
@@ -60,7 +60,7 @@ INSTALLED_APPS = (
 
     # third-party library
     'rest_framework',
-    'djcelery',
+    # 'djcelery',
 )
 
 MIDDLEWARE_CLASSES = (

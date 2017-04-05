@@ -29,10 +29,9 @@ class SquashSpider(scrapy.Spider):
             yield request
 
     def live_sport_item(self, response):
-        selector= response.xpath("//*[@id='ProductDescription']")
-        description_list=selector.xpath("//span[@class='prod-descr']//*/text()").extract()
+        selector_list= response.xpath("//*[@id='ProductDescription']//*/text()").extract()
         item = response.meta['item']
-        for des in description_list:
-            item['description']=des
+        for des in selector_list:
+            item['description']=strip_unicode(des)
 
         yield item

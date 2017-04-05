@@ -20,13 +20,19 @@ class SquashSpider(scrapy.Spider):
         for selector in selector_list:
             item = LiveSportItem()
             item['product_name'] =  selector.xpath("div[3]/strong/a/text()")[0].extract()
-            url = selector.xpath("div[3]/strong/a/@href")[0].extract()
+            url = selector.xpath("//div[3]/strong/a/@href")[0].extract()
             item['product_url'] = url
-            price = selector.xpath("div[3]/em/span/text()")[0].extract()
+            price = selector.xpath("//div[3]/em/text()")[0].extract()
             item['price'] = price
             request = Request(url, callback=self.live_sport_item)
             request.meta['item'] = item
             yield request
 
     def live_sport_item(self, response):
-        pass
+        selector= response.xpath("//*[@id='ProductDescription']")
+        description_list=selector.xpath("//span[@class='prod-descr']//*/text()").extract()
+        item = response.meta['item']
+        for des in description_list:
+            item['description']=des
+
+        yield item

@@ -3,6 +3,7 @@ from models import Order
 from forms import OrderForm
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 # here dashboard
@@ -21,6 +22,7 @@ def dashboard(request):
     form = OrderForm()
     return render(request,'dashboard.html',{'orders':orders,'form':form})
 
+@login_required
 def create_order(request):
     if request.method=='POST':
         form=OrderForm(request.POST)
@@ -31,4 +33,3 @@ def create_order(request):
         form=OrderForm()
 
     return render(request,'order_form.html',{'form':form})
-

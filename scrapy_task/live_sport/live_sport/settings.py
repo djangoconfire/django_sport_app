@@ -1,18 +1,34 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for live_sport project
-#
-# For simplicity, this file contains only the most important settings by
-# default. All the other settings are documented here:
-#
-#     http://doc.scrapy.org/en/latest/topics/settings.html
-#
+
+import os
+import sys
+import django
+
+# django project settings
+
+from decouple import config
+
+DJANGO_PROJECT_PATH='/home/pycon/Desktop/Live_your_sport'
+
+DJANGO_SETTINGS_MODULE = 'live_sport.settings'
+sys.path.insert(0, DJANGO_PROJECT_PATH)
+os.environ['DJANGO_SETTINGS_MODULE'] = DJANGO_SETTINGS_MODULE
+
 
 BOT_NAME = 'live_sport'
 
 SPIDER_MODULES = ['live_sport.spiders']
 NEWSPIDER_MODULE = 'live_sport.spiders'
 
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'live_sport (+http://www.yourdomain.com)'
+#
+# sys.path.insert(0,'/home/pycon/Desktop/Live_your_sport')
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'live_sport.settings'
 
+ITEM_PIPELINES = {
+    'live_sport.pipelines.LiveSportPipeline': 300,
+}
+
+DOWNLOAD_DELAY = 0.5
+# Obey robots.txt rules
+ROBOTSTXT_OBEY = True

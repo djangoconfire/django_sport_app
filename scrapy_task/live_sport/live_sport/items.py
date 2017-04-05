@@ -5,8 +5,17 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy.item import Item,Field
+from scrapy_djangoitem import DjangoItem
+# from live_sport.live_sport_app import models
+
+#
+# class TestItem(DjangoItem):
+#     django_model = models.Order
 
 
-class LiveSportItem(scrapy.Item):
-    pass
+class LiveSportItem(Item):
+    product_name = Field()
+    product_url=Field()
+    price =Field()
+    description =Field()

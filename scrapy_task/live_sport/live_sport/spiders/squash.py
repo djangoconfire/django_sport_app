@@ -29,12 +29,4 @@ class SquashSpider(scrapy.Spider):
             yield request
 
     def live_sport_item(self, response):
-        item = response.meta['item']
-        description_list= response.xpath("//*[@id='ProductDescription']//*/text()").extract()
-        description=""
-        for des in description_list:
-            record = strip_unicode(des)
-            description= description + record
-
-        item['description'] = description
-        yield item
+        pass

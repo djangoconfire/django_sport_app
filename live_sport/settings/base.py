@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -28,15 +27,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# CELERY
-BROKER_URL = config('BROKER_URL', default='redis://localhost:6379')
-CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND',
-                               default='redis://localhost:6379')
-CELERY_ACCEPT_CONTENT = ['application/json']
+# Celery settings
+BROKER_URL = 'django://'
+CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'
-CELERY_IMPORTS = ('live_sport.tasks',)
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
+CELERYBEAT_SCHEDULE = {
+    'update_events': {
+        'task': 'live_sport_app.tasks.crawl',
+        'schedule': timedelta(minutes=30)
+    }
+}
 
 # Application definition
 

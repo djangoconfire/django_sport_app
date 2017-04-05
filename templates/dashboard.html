@@ -8,6 +8,7 @@
 
 {% block js_block %}
 	<script type="text/javascript" src="{% static 'js/order.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/download.js' %}"></script>
 {% endblock %}
 
 {% block extra %}
@@ -21,7 +22,7 @@
 	<div class='container'>
 		<div class="btn-wrapper">
 			<button class="btn btn-success pull-right" data-target="#create_order" data-toggle="modal">Create Order</button>
-			<button class="btn btn-primary pull-right" id="download">Download CSV</button>
+			<button class="btn btn-primary pull-right" id="getcsv">Download CSV</button>
 		</div>
 
 		<div  class="dashboard-container">

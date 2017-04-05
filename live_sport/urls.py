@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import include, url,include
 from django.contrib import admin
 from django.conf import settings
+from django.conf.urls.static import static
+
+from api import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -23,9 +26,15 @@ urlpatterns = [
     url(r'^accounts/logout/', 'user_profile.views.user_logout', name='logout'),
     url(r'',include('live_sport_app.urls',namespace='live_sport_app')),
     url(r'^user/',include('user_profile.urls',namespace='user_profile')),
+
+    # for api
+    url(r'^api/', include('api.urls')),
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework')),
+
 ]
 
 
-urlpatterns +=[
-        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

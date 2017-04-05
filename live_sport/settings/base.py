@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -49,6 +50,10 @@ INSTALLED_APPS = (
     #local apps
     'live_sport_app',
     'user_profile',
+    'api',
+
+    #third-party library
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (

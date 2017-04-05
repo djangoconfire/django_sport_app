@@ -1,4 +1,4 @@
-var api_url='http://localhost:8000/api/order_list';
+var api_url='/api/order_list/';
 
 $.getJSON(api_url,function(data){
     console.log(data);

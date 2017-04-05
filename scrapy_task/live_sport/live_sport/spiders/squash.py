@@ -16,7 +16,7 @@ class SquashSpider(scrapy.Spider):
         start_urls.append("https://www.liveyoursport.com/squash/?page=" + str(num))
 
     def parse(self, response):
-        selector_list=response.xpath("//*[@id='frmCompare']/ul/li")
+        selector_list=response.xpath("//*[@class='category-page']/ul/li")
         for selector in selector_list:
             item = LiveSportItem()
             item['product_name'] =  selector.xpath("div[3]/strong/a/text()")[0].extract()
@@ -37,4 +37,4 @@ class SquashSpider(scrapy.Spider):
             description= description + record
 
         item['description'] = description
-        return item
+        yield item

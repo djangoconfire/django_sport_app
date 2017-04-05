@@ -36,7 +36,7 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
-CELERY_IMPORTS = ('cars.tasks',)
+CELERY_IMPORTS = ('live_sport.tasks',)
 
 # Application definition
 

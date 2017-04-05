@@ -72,7 +72,7 @@ def user_login(request):
         if user is not None:
             login(request, user)
             user = UserProfile.objects.get(user=user)
-            return HttpResponseRedirect('/' + 'user/' + request.POST.get('username', ''))
+            return HttpResponseRedirect('/')
 
         else:
             return render(request,"login.html", {"next": request.POST['next'],
@@ -99,9 +99,3 @@ def user_profile(request, username):
             message = "UserProfile does not exist"
             return render_to_response('500.html', {'error': message}, context_instance=RequestContext(request))
     return render_to_response('dashboard.html',{},context_instance=RequestContext(request))
-
-
-
-
-
-

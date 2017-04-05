@@ -7,7 +7,7 @@
 
 First clone this repo or download its zip file.
 
-git clonehttps://github.com/djangoconfire/django_sport_app.git
+**git clone https://github.com/djangoconfire/django_sport_app.git**
 
 1. pip install virtualenv env
 2. cd env

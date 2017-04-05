@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from decouple import config
+from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -29,6 +30,20 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Celery settings
+BROKER_URL = 'django://'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
+CELERYBEAT_SCHEDULE = {
+    'update_events': {
+        'task': 'live_sport_app.tasks.crawl',
+        'schedule': timedelta(minutes=30)
+    }
+}
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -38,6 +53,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'kombu.transport.django',
     #local apps
     'live_sport_app',
     'user_profile',
@@ -45,6 +61,7 @@ INSTALLED_APPS = (
 
     # third-party library
     'rest_framework',
+    'djcelery',
 )
 
 MIDDLEWARE_CLASSES = (

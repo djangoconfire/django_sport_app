@@ -18,15 +18,15 @@ os.environ['DJANGO_SETTINGS_MODULE'] = DJANGO_SETTINGS_MODULE
 
 BOT_NAME = 'live_sport'
 
-SPIDER_MODULES = ['live_sport.spiders']
-NEWSPIDER_MODULE = 'live_sport.spiders'
+SPIDER_MODULES = ['scrapy_task.live_sport.live_sport.spiders']
+NEWSPIDER_MODULE = 'scrapy_task.live_sport.live_sport.spiders'
 
 #
 # sys.path.insert(0,'/home/pycon/Desktop/Live_your_sport')
 # os.environ['DJANGO_SETTINGS_MODULE'] = 'live_sport.settings'
 
 ITEM_PIPELINES = {
-    'live_sport.pipelines.LiveSportPipeline': 300,
+    'scrapy_task.live_sport.live_sport.pipelines.LiveSportPipeline': 300,
 }
 
 DOWNLOAD_DELAY = 0.5

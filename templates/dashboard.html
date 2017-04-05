@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load i18n %}
+{% load humanize %}
 
 {% block head %}
 	<link rel="stylesheet" href="{% static 'css/order.css'%}" type="text/css">
@@ -28,7 +29,7 @@
 		<div  class="dashboard-container">
 			<div class="row">
 				<div class="col-md-12">
-					<table class="table table-responsive table-condensed table-hover table-striped" data-toggle="table" data-sort-name="order_status">
+					<table id="order_table" class="table table-responsive table-condensed table-hover table-striped" data-toggle="table" data-sort-name="order_status">
 						<thead>
 							<tr>
 								<th>OrderId</th>
@@ -49,7 +50,7 @@
 									<td>{{order.product_name}}<td>
 									<td>{{order.order_status}}<td>
 									<td><a href="{{order.product_url}}">{{order.product_url}}</a></td>
-									<td>{{order.price}}</td>
+									<td>{{order.price | intcomma}}</td>
 								</tr>
 							{% endfor %}
 						</tbody>

@@ -17,5 +17,5 @@ scrapy-djangoitem==1.0.0
 service-identity==14.0.0
 simplegeneric==0.8.1
 six==1.9.0
-static==0.6.1
+static==0.2
 Twisted==15.3.0

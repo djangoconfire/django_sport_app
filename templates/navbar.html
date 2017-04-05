@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<div class="navbar">
+    <div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" style="width:200px;height:100px;"></a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav pull-right">
+             {% if user.is_authenticated %}
+                 <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" id="user-dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>{{ user.username }} <span class="caret"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                          <li><a id="user-dropdown-item-sign-out" href="/accounts/logout/"><span class="glyphicon glyphicon-off" style="padding:10px;"></span>Sign out</a></li>
+
+                      </ul>
+                  </li>
+              {% else %}
+                    <li><a id="user-dropdown-item-sign-in" href="/accounts/login/"><span class="glyphicon glyphicon-log-in" style="padding:10px;"></span>Login</a></li>
+              {% endif %}
+          </ul>
+        </div>
+
+        <div class="col-md-3 input-group pull-right form-group">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+          <input type="text" class="filter form-control" placeholder="What you looking for?">
+        </div>
+      </div><!-- /.container-fluid -->
+  </div>

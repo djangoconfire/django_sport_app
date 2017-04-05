@@ -24,9 +24,7 @@ class SquashSpider(scrapy.Spider):
             item['product_url'] = url
             price = selector.xpath("//div[3]/em/text()")[0].extract()
             item['price'] = price
-            request = Request(url, callback=self.live_sport_item)
-            request.meta['item'] = item
-            yield request
+            yield Request(url, meta={'item':item}, callback=self.live_sport_item)
 
     def live_sport_item(self, response):
         selector_list= response.xpath("//*[@id='ProductDescription']//*/text()").extract()

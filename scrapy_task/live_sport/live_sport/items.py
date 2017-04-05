@@ -7,11 +7,11 @@
 
 from scrapy.item import Item,Field
 from scrapy_djangoitem import DjangoItem
-# from live_sport.live_sport_app import models
+from live_sport_app import models
 
 #
-# class TestItem(DjangoItem):
-#     django_model = models.Order
+class ScrapedItem(DjangoItem):
+    django_model = models.Order
 
 
 class LiveSportItem(Item):

@@ -24,8 +24,14 @@ with open(csv_filepathname,'rU') as csv_file:
         order.product_name=row[6]
         order.order_status=row[1]
         order.product_url=row[7]
-        if row[23]:
-            order.price=(Decimal(row[23]) * 66 )
+        try:
+            if row[23]:
+                order.price=(Decimal(row[23]) * 66 )
+            else:
+                order.price=0
+        except Exception as e:
+            print e
+
         print order
         print 'for debugging'
         # order.price=row[23]
